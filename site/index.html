@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gustav Gelfort</title>
+<meta name="description" content="Gustav Gelfort works in IT consulting in Switzerland, on technology, AI and engineering. Writing soon.">
+<meta name="theme-color" content="#f6f7f8">
+
+<!-- Link previews (LinkedIn, Instagram, WhatsApp, iMessage…) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gustavgelfort.com/">
+<meta property="og:title" content="Gustav Gelfort">
+<meta property="og:description" content="IT consulting, AI and engineering, from Switzerland. Writing soon.">
+<meta property="og:image" content="https://gustavgelfort.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gustavgelfort.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none' stroke='%232251ff' stroke-width='3'%3E%3Cpath d='M32 6c14 0 26 9 26 25S46 58 31 58 6 47 6 31 18 6 32 6Z'/%3E%3Cpath d='M32 17c8 0 15 5 15 14s-7 16-16 16-14-7-14-15 6-15 15-15Z'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f6f7f8;
+    --ink: #051c2c;      /* deep navy */
+    --text: #4f6170;
+    --soft: #7d8b96;
+    --rule: #dde2e6;
+    --b1: #2251ff;       /* electric blue */
+    --b2: #00a9f4;       /* cyan */
+    --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+    --sans: "Inter", system-ui, -apple-system, sans-serif;
+  }
+  :root[data-theme="dark"] {
+    --bg: #051c2c;
+    --ink: #eef3f7;
+    --text: #9fb1bf;
+    --soft: #7790a3;
+    --rule: #17344a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #051c2c;
+      --ink: #eef3f7;
+      --text: #9fb1bf;
+      --soft: #7790a3;
+      --rule: #17344a;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: clip; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background .4s, color .4s;
+  }
+  a { color: inherit; }
+
+  /* The ribbon: a band of fine blue lines flowing through the whole page */
+  #ribbon { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+  .wrap { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- header ---------- */
+  header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 40px 0 0; }
+  .name { font-size: 20px; font-weight: 600; letter-spacing: -.01em; text-decoration: none; }
+  nav { display: flex; align-items: center; gap: 28px; font-family: var(--sans); font-size: 14px; }
+  nav a { color: var(--text); text-decoration: none; transition: color .2s; }
+  nav a:hover { color: var(--b1); }
+  .toggle {
+    width: 32px; height: 32px; display: grid; place-items: center;
+    border: 0; background: none; color: var(--text); cursor: pointer; border-radius: 50%;
+    transition: color .2s, background .2s;
+  }
+  .toggle:hover { color: var(--ink); background: var(--rule); }
+  .toggle svg { width: 16px; height: 16px; }
+  .toggle .sun { display: none; }
+  :root[data-theme="dark"] .toggle .sun { display: block; }
+  :root[data-theme="dark"] .toggle .moon { display: none; }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: clamp(80px, 14vh, 140px) 0 clamp(80px, 14vh, 150px); }
+  #rings {
+    position: absolute; z-index: -1; pointer-events: none;
+    width: 600px; height: 600px; right: -470px; top: 40%; transform: translateY(-50%);
+  }
+  @media (max-width: 1100px) { #rings { right: -360px; width: 520px; height: 520px; opacity: .8; } }
+  @media (max-width: 640px)  { #rings { right: -150px; top: 30px; transform: none; width: 300px; height: 300px; opacity: .45; } }
+
+  h1 { font-weight: 500; font-size: clamp(56px, 11vw, 104px); line-height: .95; letter-spacing: -.035em; }
+  h1 .row { display: block; overflow: hidden; padding: .15em .15em .38em 0; margin: -.15em 0 -.3em; }
+  h1 .ch {
+    display: inline-block; transform: translateY(100%); opacity: 0;
+    animation: rise 1s cubic-bezier(.2, .8, .1, 1) forwards;
+    animation-delay: calc(var(--i) * 40ms + 150ms);
+  }
+  h1 em { font-style: italic; font-weight: 400; }
+  h1 em .ch {
+    background: linear-gradient(100deg, var(--b1), var(--b2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    /* Safari only paints gradient text inside the letter's box: make the box cover the f's tail */
+    padding: .15em .12em .35em; margin: -.15em -.12em -.35em;
+  }
+  @keyframes rise { to { transform: none; opacity: 1; } }
+
+  .lede { margin-top: 36px; max-width: 540px; font-size: clamp(19px, 2.3vw, 22px); line-height: 1.6; color: var(--text); }
+  .lede strong { font-weight: 500; color: var(--ink); }
+
+  /* ---------- three themes, each with its own line pattern ---------- */
+  .themes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 110px; }
+  .theme {
+    position: relative; padding: 20px; border: 1px solid var(--rule); border-radius: 4px;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    transition: border-color .3s, transform .4s cubic-bezier(.2, .8, .1, 1);
+  }
+  .theme:hover { border-color: var(--b1); transform: translateY(-3px); }
+  .theme canvas { display: block; width: 100%; aspect-ratio: 1.4; }
+  .theme h3 { margin-top: 16px; font-size: 19px; font-weight: 500; }
+  .theme span { font-family: var(--sans); font-size: 12px; letter-spacing: .14em; color: var(--soft); }
+  @media (max-width: 640px) { .themes { grid-template-columns: 1fr; } .theme canvas { aspect-ratio: 2.4; } }
+
+  /* ---------- writing list ---------- */
+  section.writing { padding-bottom: 120px; }
+  .label {
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--soft);
+    padding-bottom: 20px; border-bottom: 1px solid var(--rule);
+  }
+  .post { display: grid; grid-template-columns: 1fr 140px; gap: 24px; align-items: center; padding: 36px 0; border-bottom: 1px solid var(--rule); }
+  .post canvas { width: 140px; height: 100px; }
+  .meta { font-family: var(--sans); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); display: flex; align-items: center; gap: 10px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--b1); animation: pulse 2.2s infinite; }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--b1) 55%, transparent); }
+    70%  { box-shadow: 0 0 0 10px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+  .post h2 { margin-top: 12px; font-size: 26px; font-weight: 600; letter-spacing: -.015em; }
+  .post p { margin-top: 12px; font-size: 17px; line-height: 1.6; color: var(--text); }
+  @media (max-width: 560px) { .post { grid-template-columns: 1fr; } .post canvas { order: -1; } }
+
+  footer { display: flex; justify-content: space-between; gap: 16px; padding: 0 0 48px; font-family: var(--sans); font-size: 13px; color: var(--soft); }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--b1); }
+
+  .fade { opacity: 0; transform: translateY(12px); animation: fade .9s cubic-bezier(.2, .8, .1, 1) forwards; }
+  .d1 { animation-delay: .1s; } .d2 { animation-delay: .8s; } .d3 { animation-delay: 1.1s; }
+  @keyframes fade { to { opacity: 1; transform: none; } }
+
+  @media (max-width: 560px) { nav { gap: 18px; } nav .hide-sm { display: none; } footer { flex-direction: column; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    h1 .ch, .fade { opacity: 1; transform: none; }
+  }
+</style>
+<script>
+  try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+</head>
+<body>
+  <canvas id="ribbon" aria-hidden="true"></canvas>
+
+  <div class="wrap">
+    <header class="fade d1">
+      <a class="name" href="/">Gustav Gelfort</a>
+      <nav>
+        <a href="https://www.linkedin.com/in/gustavgelfort/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="hide-sm" href="mailto:gustavgelfort@icloud.com">Email</a>
+        <button class="toggle" type="button" aria-label="Switch light and dark mode">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <canvas id="rings" aria-hidden="true"></canvas>
+      <h1 aria-label="Gustav Gelfort">
+        <span class="row" aria-hidden="true" data-split>Gustav</span>
+        <em class="row" aria-hidden="true" data-split>Gelfort</em>
+      </h1>
+      <p class="lede fade d2">
+        I work in <strong>IT consulting</strong> in Switzerland, where technology,
+        AI and engineering meet real organisations. Notes from that work, soon.
+      </p>
+    </div>
+
+    <div class="themes fade d3">
+      <div class="theme"><canvas data-pattern="rings" data-seed="11" aria-hidden="true"></canvas><span>01</span><h3>Technology</h3></div>
+      <div class="theme"><canvas data-pattern="waves" data-seed="23" aria-hidden="true"></canvas><span>02</span><h3>AI</h3></div>
+      <div class="theme"><canvas data-pattern="grid" data-seed="37" aria-hidden="true"></canvas><span>03</span><h3>Engineering</h3></div>
+    </div>
+
+    <section class="writing fade d3">
+      <h3 class="label">Writing</h3>
+      <div class="post">
+        <div>
+          <div class="meta"><span class="dot"></span>Coming soon</div>
+          <h2>First article in the works</h2>
+          <p>Posts will appear here, each on its own page you can share.</p>
+        </div>
+        <canvas data-pattern="rings" data-seed="5" aria-hidden="true"></canvas>
+      </div>
+    </section>
+
+    <footer>
+      <span>© <span id="y">2026</span> Gustav Gelfort</span>
+      <a href="mailto:gustavgelfort@icloud.com">gustavgelfort@icloud.com</a>
+    </footer>
+  </div>
+
+<script>
+  // ---------- page basics ----------
+  let n = 0;
+  document.querySelectorAll('[data-split]').forEach(row => {
+    row.innerHTML = [...row.textContent].map(c => `<span class="ch" style="--i:${n++}">${c}</span>`).join('');
+  });
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  const root = document.documentElement;
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  document.querySelector('.toggle').addEventListener('click', () => {
+    root.dataset.theme = isDark() ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  });
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NAVY = [5, 28, 44], BLUE = [34, 81, 255], CYAN = [0, 169, 244];
+  const mix = (a, b, f) => a.map((v, i) => Math.round(v + (b[i] - v) * f));
+  // In dark mode, navy disappears into the background, so lines go blue → cyan instead
+  const ramp = f => isDark() ? mix(BLUE, CYAN, f) : (f < .5 ? mix(NAVY, BLUE, f * 2) : mix(BLUE, CYAN, (f - .5) * 2));
+  const dprOf = () => Math.min(devicePixelRatio || 1, 2);
+  function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+  let mx = 0, my = 0, tmx = 0, tmy = 0, scroll = 0;
+  addEventListener('pointermove', e => { tmx = e.clientX / innerWidth * 2 - 1; tmy = e.clientY / innerHeight * 2 - 1; });
+  addEventListener('scroll', () => { scroll = scrollY; }, { passive: true });
+
+  // ---------- 1. Ribbon: a twisting band of fine lines flowing across the screen ----------
+  const rb = document.getElementById('ribbon'), rctx = rb.getContext('2d');
+  const LINES = 34;
+  function sizeRibbon() { const d = dprOf(); rb.width = innerWidth * d; rb.height = innerHeight * d; }
+
+  function drawRibbon(t, intro) {
+    const W = rb.width, H = rb.height, d = dprOf();
+    rctx.clearRect(0, 0, W, H);
+    rctx.lineWidth = 1 * d;
+    const sp = scroll / innerHeight;                 // scrolling moves the ribbon along
+    const reveal = W * (-0.1 + 1.25 * intro);        // ribbon draws in from the left
+    for (let i = 0; i < LINES; i++) {
+      const u = i / (LINES - 1) - .5;
+      const c = ramp(i / (LINES - 1));
+      const g = rctx.createLinearGradient(0, 0, W, 0);
+      g.addColorStop(0, `rgba(${c},0)`);
+      g.addColorStop(.18, `rgba(${c},.55)`);
+      g.addColorStop(.82, `rgba(${c},.55)`);
+      g.addColorStop(1, `rgba(${c},0)`);
+      rctx.strokeStyle = g;
+      rctx.beginPath();
+      for (let x = -20 * d; x <= Math.min(W + 20 * d, reveal); x += 6 * d) {
+        const s = x / W;
+        // centre line sweeps from lower-left to upper-right, bending with time, scroll and pointer
+        const cy = H * (0.78 - 0.5 * s + 0.12 * Math.sin(s * 2.4 + t * .5 + sp * 1.4) + my * .04 - sp * .18);
+        // band width oscillates through zero, which reads as the ribbon twisting
+        const w = H * 0.11 * Math.sin(s * 3.2 - t * .7 + sp + mx * .4) + H * 0.02 * Math.sin(s * 9 + t);
+        const y = cy + u * w * 2 + Math.sin(s * 6 + i * .25 + t) * 2 * d;
+        x <= -20 * d ? rctx.moveTo(x, y) : rctx.lineTo(x, y);
+      }
+      rctx.stroke();
+    }
+  }
+
+  // ---------- 2. Contour rings ----------
+  function makeRings(seed) {
+    const r = rng(seed);
+    return Array.from({ length: 5 }, (_, i) => ({ k: i + 2, a: (.11 / (i + 1)) * (.7 + r() * .6), p: r() * 6.28, s: (r() - .5) * .7, tw: (r() - .5) * 1.4 }));
+  }
+  function drawRings(ctx, S, cx, cy, R, H, t, intro, count, lw, pull) {
+    ctx.lineWidth = lw;
+    for (let i = 1; i <= count; i++) {
+      const f = i / count;
+      const appear = Math.max(0, Math.min(1, intro * 1.6 - f * .6));
+      if (!appear) continue;
+      ctx.strokeStyle = `rgba(${ramp(1 - f)},${(.35 + .55 * f) * appear})`;
+      ctx.beginPath();
+      for (let p = 0; p <= 200; p++) {
+        const th = p / 200 * 6.2832;
+        let w = 0;
+        for (const h of H) w += h.a * Math.sin(h.k * th + h.p + t * h.s + f * h.tw);
+        const pl = pull ? (Math.cos(th) * mx + Math.sin(th) * my) * .07 * f : 0;
+        const rad = f * (1 + w * (.3 + .7 * f) + pl) * R * (.9 + .1 * appear);
+        const x = cx + Math.cos(th) * rad, y = cy + Math.sin(th) * rad;
+        p ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+      }
+      ctx.closePath(); ctx.stroke();
+    }
+  }
+  const hero = document.getElementById('rings'), hctx = hero.getContext('2d');
+  const heroH = makeRings(Math.floor(Math.random() * 1e6));
+  function sizeHero() { hero.width = hero.height = Math.round(hero.getBoundingClientRect().width * dprOf()); }
+
+  // ---------- 3. Small pattern tiles: same line vocabulary, three variations ----------
+  const tiles = [...document.querySelectorAll('canvas[data-pattern]')].map(cv => ({
+    cv, ctx: cv.getContext('2d'), type: cv.dataset.pattern, seed: +cv.dataset.seed, H: makeRings(+cv.dataset.seed)
+  }));
+  function sizeTiles() { tiles.forEach(o => { const b = o.cv.getBoundingClientRect(), d = dprOf(); o.cv.width = b.width * d; o.cv.height = b.height * d; }); }
+  function drawTile(o, t) {
+    const { ctx, cv } = o, W = cv.width, H = cv.height, d = dprOf();
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = d;
+    if (o.type === 'rings') {
+      drawRings(ctx, W, W / 2, H / 2, Math.min(W, H) * .46, o.H, t, 1, 14, d, false);
+    } else if (o.type === 'waves') {
+      // stacked lines that converge and fan out, like signal becoming pattern
+      for (let i = 0; i < 22; i++) {
+        const u = i / 21 - .5;
+        ctx.strokeStyle = `rgba(${ramp(i / 21)},.8)`;
+        ctx.beginPath();
+        for (let x = 0; x <= W; x += 3 * d) {
+          const s = x / W;
+          const spread = Math.sin(s * Math.PI) * .9 + .1;
+          const y = H / 2 + u * H * .85 * spread * Math.cos(s * 2 + t * .8) + Math.sin(s * 5 + t + i * .15) * 4 * d;
+          x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+        }
+        ctx.stroke();
+      }
+    } else {
+      // a fine grid warped by a moving field
+      const cols = 16, rows = 11;
+      const warp = (gx, gy) => {
+        const x = gx / cols * W, y = gy / rows * H;
+        const dx = Math.sin(gy / rows * 4 + t) * W * .035, dy = Math.cos(gx / cols * 4 + t * .8) * H * .05;
+        return [x + dx, y + dy];
+      };
+      for (let gy = 0; gy <= rows; gy++) {
+        ctx.strokeStyle = `rgba(${ramp(gy / rows)},.7)`; ctx.beginPath();
+        for (let gx = 0; gx <= cols; gx++) { const [x, y] = warp(gx, gy); gx ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+        ctx.stroke();
+      }
+      for (let gx = 0; gx <= cols; gx++) {
+        ctx.strokeStyle = `rgba(${ramp(gx / cols)},.45)`; ctx.beginPath();
+        for (let gy = 0; gy <= rows; gy++) { const [x, y] = warp(gx, gy); gy ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+        ctx.stroke();
+      }
+    }
+  }
+
+  // ---------- loop ----------
+  function sizeAll() { sizeRibbon(); sizeHero(); sizeTiles(); }
+  addEventListener('resize', sizeAll);
+  sizeAll();
+  const start = performance.now();
+  let t = 0;
+  function frame(now) {
+    const intro = reduce ? 1 : Math.min(1, (now - start) / 2600);
+    mx += (tmx - mx) * .05; my += (tmy - my) * .05;
+    drawRibbon(t, intro);
+    hctx.clearRect(0, 0, hero.width, hero.height);
+    drawRings(hctx, hero.width, hero.width / 2, hero.height / 2, hero.width * .42, heroH, t, intro, 28, 1.1 * dprOf(), true);
+    tiles.forEach(o => drawTile(o, t));
+    t += .006;
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+</script>
+</body>
+</html>
