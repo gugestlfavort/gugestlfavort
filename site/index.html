@@ -96,7 +96,7 @@
   @media (max-width: 640px)  { #rings { right: -150px; top: 30px; transform: none; width: 300px; height: 300px; opacity: .45; } }
 
   h1 { font-weight: 500; font-size: clamp(56px, 11vw, 104px); line-height: .95; letter-spacing: -.035em; }
-  h1 .row { display: block; overflow: hidden; padding: .12em .1em .24em 0; margin: -.12em 0 -.16em; }
+  h1 .row { display: block; overflow: hidden; padding: .15em .15em .38em 0; margin: -.15em 0 -.3em; }
   h1 .ch {
     display: inline-block; transform: translateY(100%); opacity: 0;
     animation: rise 1s cubic-bezier(.2, .8, .1, 1) forwards;
@@ -106,7 +106,8 @@
   h1 em .ch {
     background: linear-gradient(100deg, var(--b1), var(--b2));
     -webkit-background-clip: text; background-clip: text; color: transparent;
-    padding: 0 .08em; margin: 0 -.08em;
+    /* Safari only paints gradient text inside the letter's box: make the box cover the f's tail */
+    padding: .15em .12em .35em; margin: -.15em -.12em -.35em;
   }
   @keyframes rise { to { transform: none; opacity: 1; } }
 
